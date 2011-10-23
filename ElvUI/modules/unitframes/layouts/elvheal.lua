@@ -978,7 +978,7 @@ local function Shared(self, unit)
 				buffs.size = (((((C["unitframes"].playtarwidth - POWERBAR_OFFSET) - (buffs.spacing*(buffs.num/C["unitframes"].targetnumbuffrows - 1))) / buffs.num)) * C["unitframes"].targetnumbuffrows)*E.ResScale
 				buffs:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, SPACING)				
 			else
-				buffs:SetWidth(TARGET_WIDTH)
+				buffs:SetWidth(TARGET_WIDTH / 1.8)
 				buffs.size = ((((C["unitframes"].playtarwidth - (buffs.spacing*(buffs.num/C["unitframes"].targetnumbuffrows - 1))) / buffs.num)) * C["unitframes"].targetnumbuffrows)*E.ResScale
 				buffs:Point("BOTTOM", self, "TOP", 0, SPACING)
 			end
@@ -1001,7 +1001,7 @@ local function Shared(self, unit)
 				debuffs.size = (((((C["unitframes"].playtarwidth - POWERBAR_OFFSET) - (debuffs.spacing*(debuffs.num/C["unitframes"].targetnumdebuffrows - 1))) / debuffs.num)) * C["unitframes"].targetnumbuffrows)*E.ResScale
 			else
 				debuffs:SetWidth(TARGET_WIDTH)
-				debuffs.size = (((C["unitframes"].playtarwidth - (debuffs.spacing*(debuffs.num/C["unitframes"].targetnumdebuffrows - 1))) / debuffs.num) * C["unitframes"].targetnumdebuffrows)*E.ResScale
+				debuffs.size = (((C["unitframes"].playtarwidth - (debuffs.spacing*(debuffs.num/C["unitframes"].targetnumdebuffrows - 1))) / debuffs.num) * C["unitframes"].targetnumdebuffrows)*E.ResScale * 1.34
 			end
 			debuffs:SetHeight(debuffs.size * C["unitframes"].targetnumdebuffrows)
 			if C["unitframes"].targetbuffs then
@@ -1009,9 +1009,9 @@ local function Shared(self, unit)
 			else
 				debuffs:Point("BOTTOM", self, "TOP", 0, SPACING)
 			end
-			debuffs.initialAnchor = 'BOTTOMRIGHT'
-			debuffs["growth-y"] = "UP"
-			debuffs["growth-x"] = "LEFT"
+			debuffs.initialAnchor = 'TOPLEFT'
+			debuffs["growth-y"] = "DOWN"
+			debuffs["growth-x"] = "RIGHT"
 			debuffs.PostCreateIcon = E.PostCreateAura
 			debuffs.PostUpdateIcon = E.PostUpdateAura
 			debuffs.CustomFilter = E.AuraFilter
@@ -1519,24 +1519,24 @@ local function LoadHealLayout()
 	-- Target's Target
 	local tot = oUF:Spawn('targettarget', "ElvHeal_targettarget")
 	tot:Point("TOPRIGHT", ElvHeal_target, "BOTTOMRIGHT", 0, -42)
-	tot:Size(SMALL_WIDTH, SMALL_HEIGHT)
+	tot:Size(SMALL_WIDTH, SMALL_HEIGHT -10)
 	
 	-- Focus
 	local focus = oUF:Spawn('focus', "ElvHeal_focus")
 	focus:Point("TOPLEFT", ElvHeal_player, "BOTTOMLEFT", 0, -42)
-	focus:Size(SMALL_WIDTH, SMALL_HEIGHT)
+	focus:Size(197, SMALL_HEIGHT)
 
 	-- Player's Pet
 	local pet = oUF:Spawn('pet', "ElvHeal_pet")
 	pet:Point("TOPRIGHT", ElvHeal_player, "BOTTOMRIGHT", 0, -42)
-	pet:Size(SMALL_WIDTH, SMALL_HEIGHT)
+	pet:Size(PLAYER_WIDTH, SMALL_HEIGHT -8)
 	pet:SetParent(player)
 
 	-- Focus's target
 	if C["unitframes"].showfocustarget == true then
 		local focustarget = oUF:Spawn('focustarget', "ElvHeal_focustarget")
 		focustarget:Point("TOP", ElvHeal_focus, "BOTTOM", 0, -32)
-		focustarget:Size(SMALL_WIDTH, SMALL_HEIGHT)
+		focustarget:Size(197, SMALL_HEIGHT)
 	end
 
 
